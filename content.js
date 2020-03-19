@@ -26,3 +26,11 @@ window.addEventListener('click', evt => {
 }, {
     capture: true,
 });
+
+/*
+document.addEventListener("lablog-request-version", function(data) {
+        const event = document.createEvent('Event');
+        event.initEvent(`chrome-version: ${chrome.runtime.getManifest().version}`);
+        document.dispatchEvent(event);
+});
+*/

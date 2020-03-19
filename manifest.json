@@ -1,32 +1,42 @@
 {
   "manifest_version": 2,
-  "name": "LabLog",
-  "version": "0.1",
+  "name": "LabLog Assistant",
+  "description": "LabLog Assistant helps you work with local file links in your LabLog ELN account.",
+  "version": "0.2",
   "browser_action": {
     "default_icon": "icon.png",
     "default_title": "LabLog"
   },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "permissions": [
-    "https://labnotebook/*",
-    "file:///*",
-    "http://localhost:8000/*"
+    "https://labnotebook.app/*",
+    "file:///*"
   ],
+  "externally_connectable": {
+    "matches": [
+      "https://labnotebook.app/*"
+    ]
+  },
   "background": {
     "scripts": [
       "background.js"
     ],
     "persistent": false
   },
-  "content_scripts": [{
-    "all_frames": true,
-    "matches": [
-      "https://labnotebook.app/*",
-      "http://localhost:8000/*"
-    ],
-    "js": [
-      "content.js"
-    ]
-  }],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "https://labnotebook.app/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
   "minimum_chrome_version": "46.0"
-  
 }

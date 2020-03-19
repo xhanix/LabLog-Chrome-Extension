@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
         tabs.forEach(tab => {
             chrome.tabs.executeScript(tab.id, {
                 file: 'content.js',
-                allFrames: true,
+                allFrames: false,
             }, result => {
                 if (typeof result === 'undefined') {
                     const message = chrome.i18n.getMessage('page_not_loaded');
@@ -39,3 +39,15 @@ const openLocalFile = (localFileUrl, baseTab) => {
         index: baseTab.index + 1,
     });
 };
+
+chrome.runtime.onMessageExternal.addListener(
+    function(request, sender, sendResponse) {
+        if (request) {
+            if (request.message) {
+                if (request.message == "version") {
+                    sendResponse({version: chrome.runtime.getManifest().version});
+                }
+            }
+        }
+        return true;
+    });
